@@ -1,0 +1,66 @@
+﻿{% extends "app/layout.html" %}
+{% block content %}
+{% if form != None %}
+<h2>Обратная связь.</h2>
+<div>
+    <form method="post" class="feedback" id="feedback">
+        {% csrf_token %}
+        <label for="{{ form.name.id_for_label }}">{{ form.name.label }}:</label>
+        {{ form.name }}<br><br>
+        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}:</label>
+        {{ form.email }}<br><br>
+        <label for="{{ form.direction.id_for_label }}">{{ form.direction.label }}:</label>
+        {{ form.direction }}<br>
+        <label for="{{ form.topic.id_for_label }}">{{ form.topic.label }}:</label>
+        <div class="select">{{ form.topic }}</div><br>
+        <label for="{{ form.check.id_for_label }}">{{ form.check.label }}?</label>
+        {{ form.check }}<br>
+        <label for="{{ form.info.id_for_label }}">{{ form.info.label }}:</label>
+        {{ form.info }}<br>
+        <div><input type="submit" value="Отправить" id="b1"></div>
+    </form>
+</div>
+  <script>
+        function b1_colorin(){$('#b1').css('color', '#d9534f');}
+        function b1_colorout(){$('#b1').css('color', 'black');}
+        $('#b1').mouseover(b1_colorin);
+        $('#b1').mouseout(b1_colorout);
+        </script>
+        <script>
+        function textclick(){$('#id_name').css('background-color', '#d9534f');}
+        function textclickoff(){$('#id_name').css('background-color', 'white');}
+        $('#id_name').focus(textclick);
+        $('#id_name').blur(textclickoff);
+        </script>
+        <script>
+        function textclick(){$('#id_email').css('background-color', '#d9534f');}
+        function textclickoff(){$('#id_email').css('background-color', 'white');}
+        $('#id_email').focus(textclick);
+        $('#id_email').blur(textclickoff);
+        </script>
+        <script>
+        function textclick(){$('#id_info').css('background-color', '#d9534f');}
+        function textclickoff(){$('#id_info').css('background-color', 'white');}
+        $('#id_info').focus(textclick);
+        $('#id_info').blur(textclickoff);
+        </script>
+     
+
+
+{% else %}
+<br>
+<h1>Ваше обращение отправлено!</h1>
+<br>
+<h1 style="font-size: 20px;">Текст обращения:</h1>
+<ul>
+    <li><span>Имя: </span>{{ data.name }}</li>
+    <li><span>E-mail: </span>{{ data.email }}</li>
+    <li><span>Кем вы являетесь?: </span>{{ data.direction }}</li>
+    <li><span>Тема обращения: </span>{{ data.topic }}</li>
+    <li><span>У вас есть аккаунт?: </span>{{ data.check }}</li>
+    <li><span>Текст обращения: </span>{{ data.info }}</li>
+</ul>
+{% endif %}
+
+
+{% endblock %}
