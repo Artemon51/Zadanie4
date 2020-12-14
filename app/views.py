@@ -10,9 +10,12 @@ from django.shortcuts import render, redirect
 
 from django.db import models
 from .models import Blog
+from .models import Zakaz
 from .models import Comment # использование модели комментариев
 from .forms import CommentForm # использование формы ввода комментария
 from .forms import BlogForm 
+from .forms import ZakazForm
+
 
 def home(request):
     """Renders the home page."""
@@ -207,3 +210,62 @@ def videopost(request):
             'year':datetime.now().year,
         }
     )
+
+
+def zakaz(request):
+    assert isinstance(request, HttpRequest)
+
+    if request.method == "POST":                # после отправки формы
+        zakazform = ZakazForm(request.POST, request.FILES)
+        if zakazform.is_valid():
+            zakaz_f = zakazform.save(commit=False)
+            zakaz_f.posted = datetime.now()
+            zakaz_f.author = request.user
+            zakaz_f.status = False
+            zakaz_f.save()                        # сохраняем изменения после добавления полей
+
+            return redirect('home')              # переадресация на страницу Блог после создания статьи
+    else:
+        zakazform = ZakazForm()                     # создание объекта формы для ввода данных
+
+    return render(
+        request,
+        'app/zakaz.html',
+        {
+            'zakazform': zakazform,           # передача формы в шаблон веб-страницы
+            'year': datetime.now().year,
+        }
+    )
+
+def kabinet(request):
+    posts = Zakaz.objects.filter(author = request.user)            #запрос на выбор всех статей из модели
+
+    assert isinstance (request, HttpRequest)
+    return render(
+        request,
+        'app/kabinet.html',
+        {
+            'posts': posts,                  #передача списка статей в шаблон веб-страницы
+            'year': datetime.now().year, 
+            }
+    )
+
+def zakazpost(request, id):
+    posts = Zakaz.objects.filter(id = id)            #запрос на выбор всех статей из модели
+
+    assert isinstance (request, HttpRequest)
+    return render(
+        request,
+        'app/zakazpost.html',
+        {
+            'posts': posts,                  #передача списка статей в шаблон веб-страницы
+            'year': datetime.now().year, 
+            }
+    )
+
+def deletezakaz(request,delid):
+    assert isinstance (request, HttpRequest)
+
+    query = Zakaz.objects.get(id=delid)
+    query.delete()
+    return redirect('kabinet') 

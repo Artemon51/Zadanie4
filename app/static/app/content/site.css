@@ -51,3 +51,12 @@ input[type="checkbox"].input-validation-error {
     margin-top: 5px;
     
 }
+
+#tema {
+    padding-left:300px;
+
+}
+
+#status {
+    color: red;
+}

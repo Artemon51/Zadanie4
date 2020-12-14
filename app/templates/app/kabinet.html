@@ -1,0 +1,20 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h3><strong>Заказы: </strong></h3>
+    {% for post in posts %}
+        <a href="{%url 'zakazpost' id=post.id %}">
+            <h4>Идентификатор заказа - {{ post.id }}, 
+            вид работы - {% if post.rabota == "1" %} Забрать груз {% elif post.rabota == "2" %} Аренда манипулятора {% else %} Аренда грузовой машины {% endif %}</h4>
+        </a>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+
+
+
+

@@ -35,7 +35,9 @@
                        <li><a href="{% url 'newpost' %}"> Добавление статьи</a></li>
                     {% endif %}
                     <li><a href="{% url 'videopost' %}"> Видео</a></li>
-                
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'zakaz' %}"> Заказ</a></li>
+                    {% endif %}
                 
                 </ul>
                 {% include 'app/loginpartial.html' %}

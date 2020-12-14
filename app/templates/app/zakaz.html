@@ -1,0 +1,24 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+<div class="jumbotron">
+    <div id="tema">
+  
+    <h2><strong>Оформление заявки</strong></h2> <br/>
+    <form method="POST" enctype="multipart/form-data"> {%csrf_token%} {#Обязательная защита от атак CSRF#}
+    <div>
+        {{ zakazform.as_p }}   
+    </div>
+    <button type="submit" class="save btn btn-default"> Отправить </button>
+    </form>
+    </div>
+
+</div>
+{% endblock %}
+    
+    
+    
+    
+    
+ 
+

@@ -62,11 +62,14 @@
     <Folder Include="Zadanie4\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\templates\app\kabinet.html" />
     <Content Include="app\templates\app\blogpost.html" />
     <Content Include="app\templates\app\blog.html" />
+    <Content Include="app\templates\app\zakaz.html" />
     <Content Include="app\templates\app\newpost.html" />
     <Content Include="app\templates\app\videopost.html" />
     <Content Include="app\templates\app\registration.html" />
+    <Content Include="app\templates\app\zakazpost.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />

@@ -27,7 +27,11 @@ urlpatterns = [
     path('videopost/', views.videopost, name='videopost'),
     path('pool/', views.pool, name='pool'),
     path('blog/', views.blog, name='blog'),
+    path('zakaz/', views.zakaz, name='zakaz'),
+    path('kabinet/', views.kabinet, name='kabinet'),
     path('(?P<parametr>\d+)/$', views.blogpost, name='blogpost'),
+    path('zakazpost/(?P<id>\d+)/$',views.zakazpost, name='zakazpost'),
+    path('deletezakaz/(?P<delid>\d+)/$',views.deletezakaz, name='deletezakaz'),
     path('login/',
          LoginView.as_view
          (

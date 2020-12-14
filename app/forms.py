@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from.models import Comment
 from.models import Blog
+from.models import Zakaz
 
 
 class BootstrapAuthenticationForm(AuthenticationForm):
@@ -49,3 +50,10 @@ class BlogForm (forms.ModelForm):
         model = Blog                                                            # используемая модель
         fields = ('title', 'description', 'content', 'image',)                   # заполнение поля
         labels = {'title': "Заголовок", 'description': "Краткое содержание", 'content': "Полное содержание" , 'image': "Картинка"}        # метка к полю формы text
+
+
+class  ZakazForm(forms.ModelForm):
+    class Meta:
+        model = Zakaz                                                            # используемая модель
+        fields = ('name', 'number', 'pay', 'rabota', 'description','image', )                   # заполнение поля
+        labels = {'name': "Ваше ФИО", 'number': "Ваш номер телефона", 'pay': "Способ оплаты" , 'rabota': "Вид работы" , 'description': "Подробнее о заказе", 'image': "Фото места работы" }        # метка к полю формы text

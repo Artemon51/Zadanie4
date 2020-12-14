@@ -1,0 +1,21 @@
+﻿{% extends "app/layout.html" %}
+{% block content %}
+
+<div class="jumbotron">
+    {% for post in posts %}
+        <h3><strong>Заказ №{{ post.id }}: </strong></h3>
+        <h4>ФИО: {{post.name}} </h4>
+        <h4>Номер телефона: {{post.number}} </h4>
+        <h4>Способ оплаты:{% if  post.pay == "1" %} Наличными {% else %} Безналичным расчетом {% endif %}</h4>
+        <h4>Вид работы: {% if post.rabota == "1" %} Забрать груз {% elif post.rabota == "2" %} Аренда манипулятора {% else %} Аренда грузовой машины {% endif %}</h4>
+        <h4>Подробности заказа: {{post.description}} </h4>
+        <h4>Дата составления: {{post.posted}} </h4>
+        {% if post.image and post.image.url != '/media/temp.jpg' %}
+            <h4>Фото места работы: <img src="{{ post.image.url }}" alt="Картинка" width="200" height="100" /> </h4>
+        {% endif %}
+        <br /><h4><div id="status">Статус заявки: {% if post.status %} Одобрен {% else %} На рассмотрении {% endif %}</div></h4><br />
+        <a href="{% url 'kabinet' %}" class="save btn btn-default">Назад</a>
+        {% if not post.status %}<a href="{% url 'deletezakaz' delid=post.id %}"  class="save btn btn-default" ><div id="status">Удалить заказ</div></a>{% endif %}
+    {% endfor %}
+</div>
+{% endblock %}
